@@ -3,6 +3,9 @@ package com.thp.spring.projetlibre.dto;
 import java.io.Serializable;
 import java.util.List;
 
+import com.thp.spring.projetlibre.entities.CommandeEntity;
+import com.thp.spring.projetlibre.entities.UtilisateurEntity;
+
 public class PizzeriaDTO extends MyDTO implements Serializable{
 	
 	/**
@@ -12,8 +15,8 @@ public class PizzeriaDTO extends MyDTO implements Serializable{
 	private int id;
 	private String nom;
 	private String adresse;
-	private List<CommandeDTO> commandesPizzeria;
-	private List<UtilisateurDTO> employes;
+	private List<CommandeEntity> commandesPizzeria;
+	private List<UtilisateurEntity> employes;
 	public int getId() {
 		return id;
 	}
@@ -32,25 +35,10 @@ public class PizzeriaDTO extends MyDTO implements Serializable{
 	public void setAdresse(String adresse) {
 		this.adresse = adresse;
 	}
-	public List<CommandeDTO> getCommandesPizzeria() {
-		return commandesPizzeria;
-	}
-	public void setCommandesPizzeria(List<CommandeDTO> commandesPizzeria) {
-		this.commandesPizzeria = commandesPizzeria;
-	}
-	public List<UtilisateurDTO> getEmployes() {
-		return employes;
-	}
-	public void setEmployes(List<UtilisateurDTO> employes) {
-		this.employes = employes;
-	}
-	@Override
-	public String toString() {
-		return "PizzeriaDTO [id=" + id + ", nom=" + nom + ", adresse=" + adresse + ", commandesPizzeria="
-				+ commandesPizzeria + ", employes=" + employes + "]";
-	}
-	public PizzeriaDTO(int id, String nom, String adresse, List<CommandeDTO> commandesPizzeria,
-			List<UtilisateurDTO> employes) {
+
+	
+	public PizzeriaDTO(int id, String nom, String adresse, List<CommandeEntity> commandesPizzeria,
+			List<UtilisateurEntity> employes) {
 		super();
 		this.id = id;
 		this.nom = nom;
@@ -58,6 +46,27 @@ public class PizzeriaDTO extends MyDTO implements Serializable{
 		this.commandesPizzeria = commandesPizzeria;
 		this.employes = employes;
 	}
+
+	
+	public List<CommandeEntity> getCommandesPizzeria() {
+		return commandesPizzeria;
+	}
+	public void setCommandesPizzeria(List<CommandeEntity> commandesPizzeria) {
+		this.commandesPizzeria = commandesPizzeria;
+	}
+	public List<UtilisateurEntity> getEmployes() {
+		return employes;
+	}
+	public void setEmployes(List<UtilisateurEntity> employes) {
+		this.employes = employes;
+	}
+	@Override
+	public String toString() {
+		return "PizzeriaDTO [id=" + id + ", nom=" + nom + ", adresse=" + adresse + ", commandesPizzeria="
+				+ commandesPizzeria + ", employes=" + employes + "]";
+	}
+
+
 	public PizzeriaDTO() {
 		super();
 	}

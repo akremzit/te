@@ -2,7 +2,6 @@ package com.thp.spring.projetlibre.entities;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -13,11 +12,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.thp.spring.projetlibre.util.Etat;
 import com.thp.spring.projetlibre.util.ModePaiement;
 import com.thp.spring.projetlibre.util.ModeRetrait;
@@ -54,7 +54,6 @@ public class CommandeEntity extends MyEntity implements Serializable {
 	private ModePaiement paiement;
 
 	@ManyToOne
-
 	@JoinColumn(name = "utilisateur_id")
 	private UtilisateurEntity utilisateur;
 
@@ -78,7 +77,8 @@ public class CommandeEntity extends MyEntity implements Serializable {
 	@JoinColumn(name = "log_id")
 	private UtilisateurEntity logistique;
 	
-	 @OneToMany(mappedBy = "commande")
+	@OneToMany(mappedBy = "commande")
+	@JsonIgnore
 	private Set<CommandeProduit> cdProduits;
 	
 
@@ -225,11 +225,30 @@ public class CommandeEntity extends MyEntity implements Serializable {
 		return cdProduits;
 	}
 
-	public void setCdProduits(Set<CommandeProduit> cdProduits) {
-		this.cdProduits = cdProduits;
+	
+	
+//	public void addCdProduit(CommandeProduit commandeProduit) {
+//		if(cdProduits==null) {
+//			cdProduits =new HashSet<CommandeProduit>();
+//		}
+//		commandeProduit.setCommande(this);
+//		cdProduits.add(commandeProduit);
+//	}
+
+
+	@Override
+	public String toString() {
+		return "CommandeEntity [id=" + id + ", dateCommande=" + dateCommande + ", dateLivraison=" + dateLivraison
+				+ ", tarif=" + tarif + ", regle=" + regle + ", status=" + status + ", retrait=" + retrait
+				+ ", paiement=" + paiement + ", utilisateur=" + utilisateur + ", pizza=" + pizza + ", client=" + client
+				+ ", caissier=" + caissier + ", livreur=" + livreur + ", logistique=" + logistique + ", cdProduits="
+				+ cdProduits + "]";
 	}
 
 	
+
+
+
 
 
 	

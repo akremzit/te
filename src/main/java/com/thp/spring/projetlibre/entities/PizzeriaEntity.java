@@ -11,12 +11,13 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 
 @Entity
 @Table(name = "pizzeria")
-public class PizzeriaEntity extends MyEntity implements Serializable{
+public class PizzeriaEntity extends MyEntity implements Serializable {
 	/**
 	 * 
 	 */
@@ -31,9 +32,10 @@ public class PizzeriaEntity extends MyEntity implements Serializable{
 	private String adresse;
 	@OneToMany(mappedBy = "pizzeriaEntity")
 	private List<StockEntity> stockEntity;
+
 	@JsonBackReference
 	public List<StockEntity> getStockEntity() {
-	return stockEntity;
+		return stockEntity;
 	}
 
 	public Long getId() {
@@ -81,5 +83,5 @@ public class PizzeriaEntity extends MyEntity implements Serializable{
 	public PizzeriaEntity() {
 		super();
 	}
-	
+
 }

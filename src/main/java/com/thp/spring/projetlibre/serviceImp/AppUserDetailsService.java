@@ -13,7 +13,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.thp.spring.projetlibre.entities.RoleEntity;
 import com.thp.spring.projetlibre.entities.UtilisateurEntity;
 import com.thp.spring.projetlibre.repository.UtilisateurRepository;
 

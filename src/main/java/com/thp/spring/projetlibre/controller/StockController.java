@@ -49,6 +49,7 @@ public class StockController {
 				stockPizzeria.setNom(stockDTO.getIngredientEntity().getNom());
 				stockPizzeria.setQtte(stockDTO.getQuantite());
 				stockPizzeriaList.add(stockPizzeria);
+				stockPizzeria = new StockPizzeriaDTO();
 			}
 		}
 

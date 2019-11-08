@@ -3,10 +3,6 @@ package com.thp.spring.projetlibre.dto;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-
 import com.thp.spring.projetlibre.entities.ProduitEntity;
 
 public class CarteDTO extends MyDTO{
@@ -50,6 +46,14 @@ public class CarteDTO extends MyDTO{
 		this.description = description;
 	}
 
+	public CarteDTO(Long id, String nom, String description, Set<ProduitEntity> produits) {
+		super();
+		this.id = id;
+		this.nom = nom;
+		this.description = description;
+		this.produits = produits;
+	}
+
 
 	public Set<ProduitEntity> getProduits() {
 		return produits;
@@ -57,15 +61,6 @@ public class CarteDTO extends MyDTO{
 
 
 	public void setProduits(Set<ProduitEntity> produits) {
-		this.produits = produits;
-	}
-
-
-	public CarteDTO(Long id, String nom, String description, Set<ProduitEntity> produits) {
-		super();
-		this.id = id;
-		this.nom = nom;
-		this.description = description;
 		this.produits = produits;
 	}
 

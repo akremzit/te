@@ -16,6 +16,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "produit")
 public class ProduitEntity extends MyEntity implements Serializable {
@@ -41,12 +45,14 @@ public class ProduitEntity extends MyEntity implements Serializable {
 	 @JoinColumn(name = "carte_id")
 	 private CarteEntity carte;
 	 
-	 @OneToMany(mappedBy = "produit")
+	@OneToMany(mappedBy = "produit")
+	@JsonIgnore
 	private Set<CommandeProduit> cdProduits;
 	 
 
 	@ManyToMany
 	private Set<PizzeriaEntity> pizzerias = new HashSet<>();
+
 
 	@OneToMany(mappedBy = "produitEntity")
 	private List<RecetteEntity> recetteEntity;

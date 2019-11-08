@@ -20,6 +20,7 @@ public class CommandeProduitId extends MyEntity implements Serializable {
 		super();
 		
 	}
+
 	public CommandeProduitId(Long idProduit, Long idCommande) {
 		super();
 		this.idProduit = idProduit;

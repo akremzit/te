@@ -1,5 +1,6 @@
 package com.thp.spring.projetlibre.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.thp.spring.projetlibre.dto.CommandeDTO;
+import com.thp.spring.projetlibre.repository.UtilisateurRepository;
 import com.thp.spring.projetlibre.service.CommandeService;
+import com.thp.spring.projetlibre.util.Etat;
 
 @RestController(value = "/commande")
 @CrossOrigin("*")
@@ -22,7 +25,8 @@ public class CommandeController {
 
 	@Autowired
 	CommandeService cmdService;
-
+	@Autowired
+	UtilisateurRepository utilisateurRepository;
 	@GetMapping(value = "/commande", produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<CommandeDTO> getAllCommande() {
 		return cmdService.findAll();
@@ -38,13 +42,20 @@ public class CommandeController {
 		cmdService.deleteCommande(cmdId);
 	}
 
-	@PostMapping(value = "/commande", produces = MediaType.APPLICATION_JSON_VALUE)
-	public void createCommande(@RequestBody CommandeDTO cmdDTO) {
+	@PostMapping(value = "/commande/{username}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public void createCommande(@RequestBody CommandeDTO cmdDTO,@PathVariable String username) {
+		cmdDTO.setUtilisateur(utilisateurRepository.findByPseudo(username));
+//		CommandeDTO commandeDTO =new CommandeDTO();
+//		ProduitDTO produitDTO =new  ProduitDTO();
+//		CommandeProduitDTO commandeProduitDTO = new CommandeProduitDTO();
+//		commandeProduitDTO.setProduit(produitDTO);
+//		commandeDTO.addCdProduit(commandeProduitDTO);
 		cmdService.addCommande(cmdDTO);
 	}
 
 	@PutMapping(value = "/commande", produces = MediaType.APPLICATION_JSON_VALUE)
 	public void updateCommande(@RequestBody CommandeDTO cmdDTO) {
+		System.out.println(cmdDTO);
 		cmdService.addCommande(cmdDTO);
 	}
 
@@ -65,6 +76,19 @@ public class CommandeController {
 	public List<CommandeDTO> getCommandeByUtilisateur(@PathVariable Long userId) {
 		System.out.println("idUSER" + userId);
 		return cmdService.findCommandeByUtilisateur(userId);
+	}
+
+	@GetMapping(value = "/commandesLivreur", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<CommandeDTO> getCommandeLivreurs() {
+		List<CommandeDTO> commanderLivreurs = new ArrayList<CommandeDTO>();
+		List<CommandeDTO> allCommands = cmdService.findAll();
+		for (CommandeDTO commandeDTO : allCommands) {
+			if (commandeDTO.getStatus() != Etat.panier && commandeDTO.getStatus() != Etat.en_attente_preparation) {
+				commanderLivreurs.add(commandeDTO);
+			}
+		}
+		System.out.println(commanderLivreurs);
+		return commanderLivreurs;
 	}
 
 }

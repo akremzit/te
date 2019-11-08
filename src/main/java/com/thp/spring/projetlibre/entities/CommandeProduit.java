@@ -2,34 +2,36 @@ package com.thp.spring.projetlibre.entities;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
-@Table(name="commande_produit")
+@Table(name = "commande_produit")
 public class CommandeProduit extends MyEntity implements Serializable {
 
 	/**
 	 * 
 	 */
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	@EmbeddedId
 	@Column(name = "commandeProduitId")
 	private CommandeProduitId cdPdt;
 	@ManyToOne
 	@JoinColumn(name = "idProduit", referencedColumnName = "id_produit", insertable = false, updatable = false)
 	private ProduitEntity produit;
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "idCommande", referencedColumnName = "id", insertable = false, updatable = false)
+
 	private CommandeEntity commande;
 	@Column(name = "quantite")
 	private double quantite;
@@ -39,7 +41,6 @@ public class CommandeProduit extends MyEntity implements Serializable {
 
 	}
 
-	
 	public CommandeProduitId getCdPdt() {
 		return cdPdt;
 	}
@@ -48,7 +49,6 @@ public class CommandeProduit extends MyEntity implements Serializable {
 		this.cdPdt = cdPdt;
 	}
 
-	
 	public ProduitEntity getProduit() {
 		return produit;
 	}
@@ -57,7 +57,6 @@ public class CommandeProduit extends MyEntity implements Serializable {
 		this.produit = produit;
 	}
 
-	
 	public CommandeEntity getCommande() {
 		return commande;
 	}
@@ -74,13 +73,11 @@ public class CommandeProduit extends MyEntity implements Serializable {
 		this.quantite = quantite;
 	}
 
-
 	@Override
 	public String toString() {
 		return "CommandeProduit [cdPdt=" + cdPdt + ", produit=" + produit + ", commande=" + commande + ", quantite="
 				+ quantite + "]";
 	}
-
 
 	public CommandeProduit(CommandeProduitId cdPdt, ProduitEntity produit, CommandeEntity commande, double quantite) {
 		super();
@@ -89,7 +86,5 @@ public class CommandeProduit extends MyEntity implements Serializable {
 		this.commande = commande;
 		this.quantite = quantite;
 	}
-
-	
 
 }

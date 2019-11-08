@@ -3,7 +3,6 @@ package com.thp.spring.projetlibre.service;
 import java.util.List;
 
 import com.thp.spring.projetlibre.dto.UtilisateurDTO;
-import com.thp.spring.projetlibre.entities.UtilisateurEntity;
 
 
 

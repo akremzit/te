@@ -2,8 +2,6 @@ package com.thp.spring.projetlibre.dto;
 
 import java.util.Set;
 
-import javax.persistence.OneToMany;
-
 import com.thp.spring.projetlibre.entities.CommandeEntity;
 import com.thp.spring.projetlibre.entities.RoleEntity;
 
